@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuktha — Offline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #FFFFFF;
+      color: #0F172A;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      text-align: center;
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      padding: 48px 32px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: #F8F9FA;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #64748B;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 24px;
+      background: #1A1A2E;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .btn:hover { transform: scale(1.02); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">📡</div>
+    <h1 id="title">You're Offline</h1>
+    <p id="message">No internet connection. Please check your connection and try again.</p>
+    <a href="/" class="btn" id="retryBtn">Try Again</a>
+  </div>
+
+  <script>
+    // Read saved language from localStorage and show localized message
+    try {
+      const lang = localStorage.getItem('yuktha-language');
+      const messages = {
+        ta: { title: 'ஆஃப்லைன்', message: 'இணைய இணைப்பு இல்லை. மீண்டும் இணைக்கப்படும்போது முயற்சிக்கவும்.', btn: 'மீண்டும் முயற்சி' },
+        hi: { title: 'ऑफ़लाइन', message: 'इंटरनेट कनेक्शन नहीं है। कनेक्ट होने पर फिर से कोशिश करें।', btn: 'फिर से कोशिश करें' },
+        te: { title: 'ఆఫ్‌లైన్', message: 'ఇంటర్నెట్ కనెక్షన్ లేదు. కనెక్ట్ అయినప్పుడు మళ్ళీ ప్రయత్నించండి.', btn: 'మళ్ళీ ప్రయత్నించండి' },
+        ml: { title: 'ഓഫ്‌ലൈൻ', message: 'ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല. കണക്ട് ചെയ്യുമ്പോൾ വീണ്ടും ശ്രമിക്കുക.', btn: 'വീണ്ടും ശ്രമിക്കുക' },
+        kn: { title: 'ಆಫ್‌ಲೈನ್', message: 'ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ. ಸಂಪರ್ಕಗೊಂಡಾಗ ​​ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.', btn: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ' },
+        bn: { title: 'অফলাইন', message: 'ইন্টারনেট সংযোগ নেই। সংযুক্ত হলে আবার চেষ্টা করুন।', btn: 'আবার চেষ্টা করুন' },
+      };
+      if (lang && messages[lang]) {
+        document.getElementById('title').textContent = messages[lang].title;
+        document.getElementById('message').textContent = messages[lang].message;
+        document.getElementById('retryBtn').textContent = messages[lang].btn;
+      }
+    } catch(e) {}
+  </script>
+</body>
+</html>

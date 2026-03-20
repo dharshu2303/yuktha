@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   YUKTHA — Global Styles
+   Premium white professional theme
+   ============================================ */
+
+:root {
+  --color-primary: #1A1A2E;
+  --color-accent: #6C63FF;
+  --color-accent-light: #A78BFA;
+  --color-success: #10B981;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F8F9FA;
+  --color-text: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-border: #E2E8F0;
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.1);
+  --radius-card: 16px;
+  --radius-btn: 12px;
+  --radius-input: 10px;
+  --transition: 200ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ============================================
+   Animated Background Orbs (CSS only)
+   Subtle, decorative, does NOT block content
+   ============================================ */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.04;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--color-accent);
+  top: -10%;
+  right: -10%;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--color-primary);
+  bottom: -15%;
+  left: -10%;
+  animation: float-reverse 25s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 400px;
+  height: 400px;
+  background: var(--color-accent-light);
+  top: 40%;
+  left: 50%;
+  animation: float 22s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 30px) scale(0.95); }
+  66% { transform: translate(25px, -40px) scale(1.05); }
+}
+
+/* ============================================
+   Selection & Focus Styles
+   ============================================ */
+::selection {
+  background: rgba(108, 99, 255, 0.15);
+  color: var(--color-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Scrollbar (Webkit)
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ============================================
+   Utility Animations
+   ============================================ */
+@keyframes pulse-mic {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(108, 99, 255, 0);
+  }
+}
+
+.mic-pulse {
+  animation: pulse-mic 1.5s ease-in-out infinite;
+}
+
+/* Spinner */
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-ring {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spinner-rotate 1s linear infinite;
+}
+
+/* Confetti burst */
+@keyframes confetti-piece {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) rotate(720deg) scale(0);
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confetti-piece 1s ease-out forwards;
+}
+
+/* Logo pulse for loading */
+@keyframes logo-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.logo-pulse {
+  animation: logo-pulse 2s ease-in-out infinite;
+}
+
+/* Step progress gradient bar */
+.progress-bar-gradient {
+  background: linear-gradient(to right, var(--color-accent), var(--color-accent-light));
+}
+
+/* Checkmark draw animation for step 5 */
+@keyframes check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-check-draw {
+  animation: check-draw 0.6s ease-out 0.3s forwards;
+}
+
+/* Chat bubble styles */
+.chat-bubble-user {
+  background: var(--color-primary);
+  color: white;
+  border-radius: 16px 16px 4px 16px;
+}
+
+.chat-bubble-ai {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border-radius: 16px 16px 16px 4px;
+}
+
+/* Drag and drop hover zone */
+.upload-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--color-accent);
+  background: rgba(108, 99, 255, 0.03);
+}
+
+/* Input focus glow */
+.input-focus-glow:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+/* ============================================
+   Responsive Container
+   ============================================ */
+.app-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  min-height: 100vh;
+}
+
+@media (min-width: 640px) {
+  .app-container {
+    padding: 0 2rem;
+  }
+}

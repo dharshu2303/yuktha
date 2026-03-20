@@ -1,0 +1,14 @@
+name = "yuktha"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = ".next"
+
+[vars]
+NODE_ENV = "production"
+
+# To use Cloudflare D1 for persistent site storage, uncomment below:
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "yuktha-sites"
+# database_id = "your-database-id-here"
