@@ -29,14 +29,12 @@
    Splash Screen Entry Animation
    ============================================ */
 @keyframes splash-zoom {
-  0% { transform: scale(1.5); opacity: 0; }
-  20% { opacity: 1; }
-  90% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0; }
+  0% { transform: scale(1.2); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .splash-logo {
-  animation: splash-zoom 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: splash-zoom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 * {

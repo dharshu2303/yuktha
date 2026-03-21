@@ -27,7 +27,7 @@ export default function Home() {
     if (currentStep === 0) {
       const timer = setTimeout(() => {
         setCurrentStep(1);
-      }, 1900);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [currentStep]);
@@ -129,8 +129,9 @@ export default function Home() {
 
       {/* Step Components */}
       {currentStep === 0 && (
-        <div className="fixed inset-0 bg-background z-50 flex items-center justify-center">
-          <img src="/logo.png" alt="Yuktha Logo" className="w-56 h-auto drop-shadow-2xl splash-logo" />
+        <div className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center">
+          <img src="/logo.png" alt="Yuktha Logo" className="w-48 h-auto drop-shadow-2xl splash-logo mb-6" />
+          <div className="spinner-ring border-t-accent" style={{ width: '28px', height: '28px', borderWidth: '3px' }} />
         </div>
       )}
 
