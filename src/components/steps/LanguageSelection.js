@@ -17,8 +17,8 @@ export default function LanguageSelection({ onNext }) {
       <Card className="w-full max-w-lg p-8 md:p-12 animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white text-2xl font-bold mb-4">
-            Y
+          <div className="inline-flex items-center justify-center mb-4">
+            <img src="/logo.png" className="w-16 h-16 object-contain drop-shadow-sm" alt="Yuktha Logo" />
           </div>
           <h1 className="text-3xl font-bold tracking-heading text-text-primary">
             Choose Your Language

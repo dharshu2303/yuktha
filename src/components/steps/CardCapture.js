@@ -54,7 +54,7 @@ export default function CardCapture({ onNext }) {
   );
 
   const handleGenerate = () => {
-    if (!cardImage) return;
+    if (!cardImage && !voiceText.trim()) return;
     onNext({ cardImage, voiceText });
   };
 
@@ -159,7 +159,7 @@ export default function CardCapture({ onNext }) {
         <div className="flex justify-center">
           <Button
             variant="primary"
-            disabled={!cardImage}
+            disabled={!cardImage && !voiceText.trim()}
             onClick={handleGenerate}
             className="w-full sm:w-auto text-base px-10 py-4"
           >

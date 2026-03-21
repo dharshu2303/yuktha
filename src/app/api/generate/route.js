@@ -5,9 +5,9 @@ export async function POST(request) {
   try {
     const { cardImageBase64, voiceText, language } = await request.json();
 
-    if (!cardImageBase64) {
+    if (!cardImageBase64 && (!voiceText || !voiceText.trim())) {
       return NextResponse.json(
-        { error: "Card image is required" },
+        { error: "Either a card image or voice details are required" },
         { status: 400 }
       );
     }

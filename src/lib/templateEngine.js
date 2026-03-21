@@ -103,7 +103,7 @@ export function buildModernTemplate(data, isPreview, langName) {
             <h2 class="text-2xl font-bold text-white mb-6">${displayName}</h2>
             <p class="mb-6">&copy; ${new Date().getFullYear()} All Rights Reserved.</p>
             <a href="https://yuktha-52jo1yac2-dharshinipriyaa426-3149s-projects.vercel.app" class="inline-flex items-center gap-2 text-sm hover:text-white transition">
-                <span class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-xs">Y</span>
+                <span class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-xs">${data.name ? data.name[0].toUpperCase() : 'B'}</span>
                 Made with Yuktha
             </a>
         </div>

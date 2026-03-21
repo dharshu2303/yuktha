@@ -79,8 +79,8 @@ export default function AIGeneration({ cardImage, voiceText, onComplete, onError
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="text-center animate-fade-in">
         {/* Animated Logo */}
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary text-white text-3xl font-bold mb-8 logo-pulse shadow-lg">
-          Y
+        <div className="inline-flex items-center justify-center mb-8 logo-pulse shadow-lg rounded-3xl overflow-hidden bg-white/50 p-2">
+          <img src="/logo.png" alt="Yuktha Logo" className="w-16 h-16 object-contain" />
         </div>
 
         {/* Rotating Message */}

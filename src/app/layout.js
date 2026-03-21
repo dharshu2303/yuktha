@@ -15,8 +15,8 @@ export const metadata = {
   keywords: "business card, website generator, AI, Indian business, free website",
   manifest: "/manifest.json",
   icons: {
-    icon: "/icons/icon-192x192.svg",
-    apple: "/icons/icon-192x192.svg",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Yuktha — Card to Website in Seconds",

@@ -27,7 +27,7 @@ export default function Home() {
     if (currentStep === 0) {
       const timer = setTimeout(() => {
         setCurrentStep(1);
-      }, 2000);
+      }, 1900);
       return () => clearTimeout(timer);
     }
   }, [currentStep]);

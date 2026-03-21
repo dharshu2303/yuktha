@@ -92,17 +92,11 @@ async function callWithRetry(fn, maxRetries = 3) {
 export async function generateFromCard(imageBase64, voiceText, language) {
   const langName = LANGUAGE_NAMES[language] || "English";
 
-  // Remove data URL prefix if present
-  const base64Data = imageBase64.includes(",")
-    ? imageBase64.split(",")[1]
-    : imageBase64;
 
-  const mimeMatch = imageBase64.match(/data:(image\/\w+);/);
-  const mimeType = mimeMatch ? mimeMatch[1] : "image/jpeg";
 
-  const prompt = `You are an expert data extractor. Analyze this business card image and extract the details.
+  const prompt = `You are an expert data extractor. Generate business details based on the provided inputs.
 
-Extract the following from the card and any user-provided context:
+Extract the following from the provided card and/or user-provided context:
 - name (person or business name)
 - business (type of business)
 - designation (job title if any)
@@ -147,15 +141,25 @@ Respond ONLY with valid JSON in this exact format (no markdown or thinking):
   }
 }`;
 
-  const imagePart = {
-    inlineData: {
-      data: base64Data,
-      mimeType: mimeType,
-    },
-  };
+  const requestParts = [prompt];
+
+  if (imageBase64) {
+    const base64Data = imageBase64.includes(",")
+      ? imageBase64.split(",")[1]
+      : imageBase64;
+    const mimeMatch = imageBase64.match(/data:(image\/\w+);/);
+    const mimeType = mimeMatch ? mimeMatch[1] : "image/jpeg";
+    
+    requestParts.push({
+      inlineData: {
+        data: base64Data,
+        mimeType: mimeType,
+      },
+    });
+  }
 
   const result = await callWithRetry(async (model) => {
-    return await model.generateContent([prompt, imagePart]);
+    return await model.generateContent(requestParts);
   });
 
   const response = await result.response;
