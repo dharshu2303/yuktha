@@ -114,7 +114,7 @@ Extract the following from the provided card and/or user-provided context:
 ${voiceText ? `Additional business details provided by the owner: "${voiceText}"` : ""}
 
 Generate two versions of this data:
-1. previewData: All fields completely translated into ${langName} for the user. CRITICAL REQUIREMENT: The previewData MUST be 100% in ${langName} without a single English word by any chance. Translate every business term, service, and tagline strictly to ${langName}.
+1. previewData: All fields completely translated into ${langName} for the user. CRITICAL REQUIREMENT: The previewData MUST be 100% in ${langName} without a single English word by any chance. If the provided card or context is in a language different from ${langName} (e.g., Tamil but requested ${langName} is Malayalam), you MUST translate all extracted content from the source language into ${langName}. Translate every business term, service, and tagline strictly to ${langName}.
 2. publishedData: All fields in professional English for the public website.
 
 Respond ONLY with valid JSON in this exact format (no markdown or thinking):

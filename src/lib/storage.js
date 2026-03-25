@@ -50,11 +50,24 @@ export async function getSite(slug) {
   return siteStore.get(slug) || null;
 }
 
-export function generateSlug() {
-  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let slug = "";
-  for (let i = 0; i < 8; i++) {
-    slug += chars.charAt(Math.floor(Math.random() * chars.length));
+export async function generateUniqueSlug(businessName) {
+  let baseSlug = (businessName || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (!baseSlug) baseSlug = "site";
+  
+  let slug = baseSlug;
+  let isUnique = false;
+  let counter = 0;
+  
+  while (!isUnique) {
+    if (counter > 0) {
+      slug = `${baseSlug}${counter}`;
+    }
+    const existing = await getSite(slug);
+    if (!existing) {
+      isUnique = true;
+    } else {
+      counter++;
+    }
   }
   return slug;
 }

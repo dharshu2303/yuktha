@@ -166,6 +166,11 @@ export function buildModernTemplate(data, isPreview, langName) {
   const seed = (displayName + displayBusiness).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const effectType = seed % 4; // 0=blobs, 1=particles, 2=geometric, 3=waves
 
+  // Create highly unique identifier per site combining multiple details
+  const siteUniqueStr = displayName + displayBusiness + (about || '') + (phone || '') + (tagline || '');
+  const uniqueSeed = siteUniqueStr.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+
+
   // Build background effect CSS based on effectType
   const bgEffects = [
     // Effect 0: Floating gradient blobs
@@ -784,7 +789,7 @@ export function buildModernTemplate(data, isPreview, langName) {
             }
 
             createScene('hero-3d-canvas', 0); // Always use TorusKnot for Hero
-            createScene('about-3d-canvas', (seed + 1) % 4);
+            createScene('about-3d-canvas', ${uniqueSeed % 4});
         })();
 
         window.addEventListener('scroll', function() {

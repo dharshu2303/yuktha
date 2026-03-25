@@ -141,7 +141,8 @@ function professional(data) {
   <script>
     (function() {
       const name = "${data.name || 'Business'}";
-      const seed = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const aboutLen = "${(data.about || '').length}";
+      const seed = (name + aboutLen).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + ${data.name ? data.name.length : 0};
 
       function create3D(containerId, typeIndex) {
         const container = document.getElementById(containerId);
@@ -328,7 +329,8 @@ function shop(data) {
   <script>
     (function() {
       const name = "${data.name || 'Shop'}";
-      const seed = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const aboutLen = "${(data.about || '').length}";
+      const seed = (name + aboutLen).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + ${data.name ? data.name.length : 0};
 
       function create3D(containerId, isHero, forceKnot) {
         const container = document.getElementById(containerId);
@@ -510,7 +512,8 @@ function creative(data) {
   <script>
     (function() {
       const name = "${data.name || 'Creative'}";
-      const seed = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const aboutLen = "${(data.about || '').length}";
+      const seed = (name + aboutLen).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + ${data.name ? data.name.length : 0};
 
       function create3D(containerId, typeIndex) {
         const container = document.getElementById(containerId);

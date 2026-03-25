@@ -79,6 +79,7 @@ export default function Home() {
             htmlContent: publishedContent,
             previewContent: previewContent,
             metaTags: generatedContent?.metaTags || {},
+            businessName: generatedContent?.publishedData?.name || "site"
           }),
         });
 

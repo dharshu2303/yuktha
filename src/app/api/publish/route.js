@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { saveSite, generateSlug } from "@/lib/storage";
+import { saveSite, generateUniqueSlug } from "@/lib/storage";
 
 export async function POST(request) {
   try {
-    const { htmlContent, previewContent, metaTags } = await request.json();
+    const { htmlContent, previewContent, metaTags, businessName } = await request.json();
 
     if (!htmlContent) {
       return NextResponse.json(
@@ -12,7 +12,7 @@ export async function POST(request) {
       );
     }
 
-    const slug = generateSlug();
+    const slug = await generateUniqueSlug(businessName);
     
     // Save to Supabase (keeps a record)
     await saveSite(slug, htmlContent, previewContent || htmlContent, metaTags || {});
@@ -20,8 +20,8 @@ export async function POST(request) {
     // Deploy to Vercel dynamically
     if (!process.env.VERCEL_TOKEN) {
       console.warn("VERCEL_TOKEN not set, fallback to local URL");
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
-      return NextResponse.json({ url: `${baseUrl}/sites/${slug}`, localUrl: `${baseUrl}/sites/${slug}?lang=local`, slug: slug });
+      const url = `https://${slug}.yuktha.online`;
+      return NextResponse.json({ url, localUrl: `${url}?lang=local`, slug });
     }
 
     const vercelResponse = await fetch("https://api.vercel.com/v13/deployments", {
@@ -76,9 +76,11 @@ export async function POST(request) {
       }
     }
 
+    const customDomainUrl = `https://${slug}.yuktha.online`;
+
     return NextResponse.json({
-      url: vercelUrl,
-      localUrl: `${vercelUrl}/local.html`,
+      url: customDomainUrl,
+      localUrl: `${customDomainUrl}?lang=local`,
       slug: slug,
     });
   } catch (error) {
