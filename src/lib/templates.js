@@ -17,8 +17,8 @@ function professional(data) {
   <title>${data.name} - ${data.designation || data.business}</title>
   <meta name="description" content="${data.metaDescription || `${data.name} - ${data.business}. Contact us for professional services.`}">
   <meta name="keywords" content="${data.metaKeywords || `${data.name}, ${data.business}, ${data.services?.join(', ')}`}">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', system-ui, sans-serif; color: #0F172A; background: #fff; line-height: 1.7; }
@@ -198,8 +198,8 @@ function shop(data) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${data.name} - ${data.business || 'Shop'}</title>
   <meta name="description" content="${data.metaDescription || `${data.name} - ${data.business}. Shop with us today!`}">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', system-ui, sans-serif; color: #0F172A; background: #fff; line-height: 1.7; }
@@ -393,8 +393,8 @@ function creative(data) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${data.name} - ${data.business || 'Creative Professional'}</title>
   <meta name="description" content="${data.metaDescription || `${data.name} - Creative professional. View portfolio and get in touch.`}">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', system-ui, sans-serif; color: #0F172A; background: #fff; line-height: 1.7; }
