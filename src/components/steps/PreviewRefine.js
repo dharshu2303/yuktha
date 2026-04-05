@@ -115,7 +115,7 @@ export default function PreviewRefine({
                   })();
                 `;
                 (currentDoc.body || currentDoc.head || currentDoc.documentElement).appendChild(script);
-                win.postMessage({ type: 'SET_EDIT_MODE', isEditMode: ${JSON.stringify(editMode)} }, '*');
+                win.postMessage({ type: 'SET_EDIT_MODE', isEditMode: editMode }, '*');
               };
               
               if (currentDoc.readyState === 'complete') injectScript();
