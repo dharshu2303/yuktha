@@ -64,6 +64,12 @@ export default function PreviewRefine({
           if (!iframeRef.current) return;
           const currentDoc = iframeRef.current.contentDocument;
           if (currentDoc) {
+            // Trigger unload event to let templates clean up WebGL contexts before overwriting doc
+            const frameWin = iframeRef.current.contentWindow;
+            if (frameWin && typeof frameWin.dispatchEvent === 'function') {
+              frameWin.dispatchEvent(new Event('unload'));
+            }
+            
             currentDoc.open();
             currentDoc.write(currentPreview);
             currentDoc.close();

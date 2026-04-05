@@ -181,6 +181,12 @@ function professional(data) {
           camera.aspect = container.offsetWidth / container.offsetHeight;
           camera.updateProjectionMatrix();
         });
+        window.addEventListener('unload', () => {
+          renderer.dispose();
+          geometry.dispose();
+          material.dispose();
+          renderer.forceContextLoss();
+        });
       }
       create3D('hero-3d-container', 0); // Always TorusKnot for Hero
       create3D('about-3d-container', seed + 1);
@@ -376,6 +382,14 @@ function shop(data) {
           camera.aspect = container.offsetWidth / container.offsetHeight;
           camera.updateProjectionMatrix();
         });
+        window.addEventListener('unload', () => {
+          renderer.dispose();
+          group.children.forEach(child => {
+            child.geometry.dispose();
+            child.material.dispose();
+          });
+          renderer.forceContextLoss();
+        });
       }
       create3D('shop-hero-3d', true, true); // true, true means hero and force knot
       create3D('shop-about-3d', false, false);
@@ -551,6 +565,12 @@ function creative(data) {
           renderer.setSize(container.offsetWidth, container.offsetHeight);
           camera.aspect = container.offsetWidth / container.offsetHeight;
           camera.updateProjectionMatrix();
+        });
+        window.addEventListener('unload', () => {
+          renderer.dispose();
+          geometry.dispose();
+          material.dispose();
+          renderer.forceContextLoss();
         });
       }
       create3D('creative-hero-3d', 1); // Knot index (1 in Creative types is Knot)
