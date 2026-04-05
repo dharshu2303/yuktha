@@ -60,6 +60,30 @@ export default function Home() {
     }
   }, [currentStep, cardData, generatedContent, publishedUrl, localUrl, isHydrated]);
 
+  // Sync currentStep with History API
+  useEffect(() => {
+    if (!isHydrated) return;
+    if (window.history.state?.step !== currentStep) {
+      if (currentStep === 0 || window.history.state === null) {
+        window.history.replaceState({ step: currentStep }, "");
+      } else {
+        window.history.pushState({ step: currentStep }, "");
+      }
+    }
+  }, [currentStep, isHydrated]);
+
+  // Listen for browser Back button
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state && event.state.step !== undefined) {
+        setCurrentStep(event.state.step);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+
   // Splash screen transition (Step 0 → 1) - but prevent if we restored to >0
   useEffect(() => {
     if (isHydrated && currentStep === 0) {
