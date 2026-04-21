@@ -118,8 +118,8 @@ Extract the following from the provided card and/or user-provided context:
 ${voiceText ? `Additional business details provided by the owner: "${voiceText}"` : ""}
 
 Generate two versions of this data:
-1. previewData: All fields completely translated into ${langName} for the user. CRITICAL REQUIREMENT: The previewData MUST be 100% in ${langName} without a single English word (except for proper names). You MUST translate every business term, service, tagline, FAQ, testimonial, and the "images" keywords array.
-2. publishedData: All fields in professional English for the public website. Keep the "images" keywords in English here for API compatibility.
+1. previewData: All fields completely translated into ${langName} for the user. CRITICAL REQUIREMENT: The previewData MUST be 100% in ${langName} without a single English word (except for proper names with no translation). You MUST translate every business term, service, tagline, FAQ, and testimonial. EXCEPTION: Do NOT translate the "images" keywords array. Keep the "images" keywords in English so they format properly for the Stability API prompt.
+2. publishedData: All fields in professional English for the public website.
 
 Respond ONLY with valid JSON in this exact format (no markdown or thinking):
 {
@@ -206,9 +206,11 @@ Respond ONLY with valid JSON in this exact format (no markdown or thinking):
     throw new Error("Failed to parse AI response: Invalid JSON");
   }
 
-  // Ensure publishedData images are English (Gemini usually does this, but we reinforce it)
+  // ALWAYS force image keywords to be English to prevent Stability AI failures
   if (parsed.publishedData && parsed.publishedData.images && Array.isArray(parsed.publishedData.images)) {
-    // Keep them English in publishedData
+    if (parsed.previewData) {
+      parsed.previewData.images = [...parsed.publishedData.images];
+    }
   }
 
   // Use Hybrid Template Engine to assemble HTML instantly
@@ -245,9 +247,9 @@ IMPORTANT RULES:
 2. Keep ALL unchanged fields exactly as they are — do not modify, rewrite, or rephrase anything the user didn't ask to change.
 3. If the user asks to change specific text like a tagline, service name, or about section, update ONLY that specific field.
 4. If the user asks to add something, add it without removing existing content.
-5. Ensure updatedPreviewData remains 100% in ${langName} including the "images" keyword array. Re-translate any English words introduced by the user's instruction into ${langName}.
+5. Ensure updatedPreviewData remains 100% in ${langName} without a single English word (except proper names). Re-translate any English words introduced by the user's instruction into ${langName}.
 6. Provide a brief, friendly confirmation message in ${langName} that specifically describes what you changed (e.g., "I updated your tagline to...").
-7. CRITICAL: For updatedPublishedData only, keep the "images" array keywords in English. For updatedPreviewData, they MUST be translated.
+7. CRITICAL: The "images" array in BOTH updatedPreviewData and updatedPublishedData MUST remain in English at all times for the image generation API to work.
 
 Respond ONLY with valid JSON in this exact format (no markdown or thinking):
 {
@@ -285,9 +287,11 @@ Respond ONLY with valid JSON in this exact format (no markdown or thinking):
     throw new Error("Failed to parse AI response: Invalid JSON");
   }
 
-  // Ensure translated keywords remain in previewData and English in publishedData
-  if (parsed.updatedPublishedData && parsed.updatedPublishedData.images) {
-    // publishedData.images should stay English
+  // ALWAYS force image keywords to be English to prevent Stability AI failures
+  if (parsed.updatedPublishedData && parsed.updatedPublishedData.images && Array.isArray(parsed.updatedPublishedData.images)) {
+    if (parsed.updatedPreviewData) {
+      parsed.updatedPreviewData.images = [...parsed.updatedPublishedData.images];
+    }
   }
 
   // Use Hybrid Template Engine to rebuild HTML
