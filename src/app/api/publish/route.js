@@ -74,6 +74,26 @@ export async function POST(request) {
       } catch (e) {
         console.warn("Could not disable deployment protection:", e.message);
       }
+
+      // Add the custom domain to the newly created Vercel project
+      try {
+        const domainResponse = await fetch(`https://api.vercel.com/v10/projects/${projectId}/domains`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${process.env.VERCEL_TOKEN}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: `${slug}.yuktha.online`
+          })
+        });
+        if (!domainResponse.ok) {
+          const domainError = await domainResponse.json().catch(() => ({}));
+          console.warn("Could not add custom domain to Vercel project:", domainError);
+        }
+      } catch (e) {
+        console.warn("Could not add custom domain to Vercel project:", e.message);
+      }
     }
 
     const customDomainUrl = `https://${slug}.yuktha.online`;
