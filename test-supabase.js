@@ -1,9 +1,10 @@
 const { createClient } = require('@supabase/supabase-js');
 
 async function testSupabase() {
-  const url = "https://iphzejaxaeikmvmsxvhq.supabase.co";
-  const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwaHplamF4YWVpa212bXN4dmhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5Nzk5MDYsImV4cCI6MjA4OTU1NTkwNn0.lFXFdQnft7wc30LHRYvECdWF5Tvfd3rvlPn0nY2E0g4";
-  
+
+const url = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
+const key = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '').trim();
+
   console.log('Testing Supabase Connection to:', url);
 
   const supabase = createClient(url, key);
